@@ -1,19 +1,16 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-func getAlbums(c *gin.Context) {
-	c.JSON(http.StatusOK, albums)
-}
-
 func main() {
 	router := gin.Default()
 	router.GET("/albums", getAlbums)
+	router.GET("/albums/:id", getAlbumByID)
+	router.POST("/albums", postAlbums)
 
 	port := os.Getenv("PORT")
 	if port == "" {
